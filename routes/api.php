@@ -30,3 +30,7 @@ Route::group(['as'=>'api.'], function () {
 
 });
 
+
+
+Route::resource('equipos', App\Http\Controllers\API\EquipoAPIController::class)
+    ->except(['create', 'edit']);
