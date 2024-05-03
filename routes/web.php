@@ -97,5 +97,3 @@ Route::group(['prefix' => ''], function () {
 
 });
 
-
-Route::resource('servicios', App\Http\Controllers\ServicioController::class);

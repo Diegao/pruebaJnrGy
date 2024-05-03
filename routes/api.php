@@ -30,7 +30,3 @@ Route::group(['as'=>'api.'], function () {
 
 });
 
-
-
-Route::resource('servicios', App\Http\Controllers\API\ServicioAPIController::class)
-    ->except(['create', 'edit']);

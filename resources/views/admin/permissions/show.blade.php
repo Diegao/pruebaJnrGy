@@ -3,91 +3,31 @@
 @section('titulo_pagina',__('Show Permission'))
 
 @section('content')
-<?php
-error_reporting(E_ALL ^ E_NOTICE);
 
-$cap = isset($_POST['monto']) ? $_POST['monto'] : 0;
-$tas = isset($_POST['tasa']) ? $_POST['tasa'] : 0;
-$per = isset($_POST['periodo']) ? $_POST['periodo'] : 0;
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Permission</h1>
+                </div>
+                <div class="col-sm-6">
 
-$tasaint = ($tas) / 100;
-$saldoini = $cap;
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-// Operación para el cálculo de amortización
-$amortizacion = $cap == 0 ? 0 : (float)($cap / $per);
-?>
-
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta id="monto" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amortizaciones</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container mt-4">
-    <h2>Tabla de Amortizaciones</h2>
-    <div class="row">
-        <div class="col-sm-12">
-            <form action="./amortizacion.php" method="POST">
-                <div class="col-sm-3">
-                    <label for="">Monto:</label>
-                    <input type="text" class="form-control" id="monto" name="monto">
+    <div class="content">
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        @include('admin.permissions.show_fields')
+                        <a href="{{ route('permissions.index') }}" class="btn btn-outline-secondary">{{__('Back')}}</a>
+                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <label for="">Tasa Interés:</label>
-                    <input type="text" class="form-control" id="tasa" name="tasa">
-                </div>
-                <div class="col-sm-3">
-                    <label for="">Período:</label>
-                    <input type="text" class="form-control" id="periodo" name="periodo">
-                </div>
-                <div class="col-sm-3">
-                    <button class="btn btn-success" type="submit">Generar</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <table class="table">
-            <thead class="table-dark">
-            <tr>
-                <th>Período</th>
-                <th>Saldo</th>
-                <th>Interés</th>
-                <th>Abono</th>
-                <th>Pago</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $capital = (float)$saldoini;
-            for ($i = 1; $i <= $per; $i++) {
-                $saldo = $capital;
-                $int = ($capital * $tasaint);
-                $abono = $amortizacion;
-                $pago = ($amortizacion + $int);
-                $saldofin = ($saldo - $abono);
-                $capital = $saldofin;
-
-                echo "<tr><td>".$i."</td>";
-                echo "<td>".number_format($saldo, 2, ".", ",")."</td>";
-                echo "<td>".number_format($int, 2, ".", ",")."</td>";
-                echo "<td>".number_format($abono, 2, ".", ",")."</td>";
-                echo "<td>".number_format($pago, 2, ".", ",")."</td></tr>";
-            }
-            ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-</body>
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</html>
-
-
 @endsection
