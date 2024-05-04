@@ -24,7 +24,8 @@ Route::group(['as'=>'api.'], function () {
         Route::post('user/add/shortcut/{user}', [UserAPIController::class,'addShortcut'])->name('users.add_shortcut');
         Route::post('user/remove/shortcut/{user}', [UserAPIController::class,'removeShortcut'])->name('users.remove_shortcut');
         Route::post('user/update/shortcut/orden/{user}', [UserAPIController::class,'updateShortcutOrden'])->name('users.update_shortcut_order');
-
+        Route::resource('clientes', App\Http\Controllers\API\ClienteAPIController::class)
+            ->except(['create', 'edit']);
     });
 
 
@@ -34,3 +35,4 @@ Route::group(['as'=>'api.'], function () {
 
 Route::resource('equipos', App\Http\Controllers\API\EquipoAPIController::class)
     ->except(['create', 'edit']);
+
