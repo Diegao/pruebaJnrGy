@@ -61,7 +61,7 @@
 
                                 <div class="form-group col-sm-6">
                                     <label for="telefono">Telefono</label>
-                                    <input  type="text"
+                                    <input  type="number"
                                             required
                                             class="form-control"
                                             id="telefono"
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <div class="form-group col-sm-6">
-                                    <label for="correo">Direccion</label>
+                                    <label for="direccion">Direccion</label>
                                     <input  type="text"
                                             required
                                             class="form-control"
@@ -248,7 +248,6 @@
                 },
 
                 async deleteItem(item) {
-
                     let confirm = await Swal.fire({
                         title: '¿Estás seguro?',
                         text: "¡No podrás revertir esto!",
@@ -257,26 +256,17 @@
                         cancelButtonColor: '#d33',
                         confirmButtonText: 'Si, elimínalo\n!'
                     });
-
                     if (confirm.isConfirmed){
                         try{
                             let res = await  axios.delete(route('api.clientes.destroy',item.id))
-                            _logI(res.data);
 
                             iziTs(res.data.message);
                             this.getDetalles();
-
-
                         }catch (e){
                             notifyErrorApi(e);
                             this.itemElimina = {};
                         }
-
                     }
-
-                },
-                esExtra(detalle){
-
                 }
             },
             computed: {

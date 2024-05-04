@@ -38,7 +38,7 @@ class Cliente extends Model
         'dpi' => 'required|string|max:13',
         'telefono' => 'required|string|max:20',
         'correo' => 'nullable|string|max:255',
-        'direccion' => 'nullable|string|max:255',
+        'direccion' => 'required|nullable|string|max:255',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
